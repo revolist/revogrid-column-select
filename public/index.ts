@@ -8,7 +8,7 @@ function generateHeader(index: number) {
   const lettersCount = 26;
   let div = index + 1;
   let label = '';
-  let pos;
+  let pos: number;
   while (div > 0) {
       pos = (div - 1) % lettersCount;
       label = String.fromCharCode(asciiFirstLetter + pos) + label;
@@ -34,14 +34,19 @@ function generateFakeDataObject(rowsNumber: number, colsNumber: number) {
       }
       result[row][col] = row + ':' + col;
       if (col === 1) {
-          columns[col] = {
-              ...columns[col],
-              columnType: 'select',
-              labelKey: 'label',
-              valueKey: 'value',
-              source: [{ label: 'according', value: 'a' }, { label: 'beyound', value: 'b' }]
-          };
-          result[row][col] = 'b';
+        columns[col] = {
+            ...columns[col],
+            columnType: 'select',
+            size: 150,
+            labelKey: 'label',
+            valueKey: 'value',
+            source: [
+              { label: 'According', value: 'a' },
+              { label: 'Over', value: 'b' },
+              { label: 'Source', value: 's' }
+            ]
+        };
+        result[row][col] = 'b';
       }
   }
   let headers = Object.keys(columns).map((k) => columns[parseInt(k, 10)]);
@@ -57,12 +62,13 @@ new Vue({
     Grid
   },
   render: (h) => {
-    const {source, headers} = generateFakeDataObject(100, 100);
+    const {source, headers} = generateFakeDataObject(100, 5);
     return h('div', { class: {'tile large': true} }, [h(Grid, {
       props: {
         source,
+        resize: true,
         columns: headers,
-        theme: 'compact',
+        theme: 'material',
         columnTypes: {
           'select': new SelectColumnType()
         }

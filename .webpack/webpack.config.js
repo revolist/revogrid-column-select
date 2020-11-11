@@ -10,7 +10,7 @@ module.exports = {
     filename: '[name].js',
     library: libraryName,
     libraryTarget: 'umd',
-    umdNamedDefine: true
+    umdNamedDefine: true,
   },
   externals: {
     '@revolist/revogrid': '@revolist/revogrid',
@@ -26,6 +26,7 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
+        
       },
     ],
   },
