@@ -1,9 +1,16 @@
-import { h, VNode } from "@stencil/core";
-import { RevoGrid } from "../../interfaces";
-import { ArrowRenderer } from "./arrow";
 import { SelectConfig } from "./type";
-
-export const SelectColumnRenderer = (_h: RevoGrid.HyperFunc<VNode>, {model, prop, column}: RevoGrid.ColumnDataSchemaModel): (VNode|string)[] => {
+const style = {
+    width: '0',
+    height: '0',
+    borderStyle: 'solid',
+    borderWidth: '5px 4px 0 4px',
+    borderColor: 'transparent',
+    borderTopColor: 'initial',
+    display: 'inline-block',
+    verticalAlign: 'middle',
+    opacity: '.4'
+  };
+export const SelectColumnRenderer = (h: any, {model, prop, column}: any): any[] => {
     let col = column as SelectConfig;
     let val = model[prop];
     if (col.labelKey && col.sourceLookup) {
@@ -11,15 +18,16 @@ export const SelectColumnRenderer = (_h: RevoGrid.HyperFunc<VNode>, {model, prop
     }
     return [
         <div class='cell-value-wrapper'>{val}</div>,
-        <ArrowRenderer class={{
-            'arrow-down': true
-        }} onClick = {e => {
-            const ev = new MouseEvent('dblclick', {
-                bubbles: true,
-                cancelable: true,
-                view: window
-            });
-            e.target.dispatchEvent(ev);
-        }}/>
+        <span class={{ 'arrow-down': true }}
+            onClick = {(e: MouseEvent) => {
+                const ev = new MouseEvent('dblclick', {
+                    bubbles: true,
+                    cancelable: true,
+                    view: window
+                });
+                e.target.dispatchEvent(ev);
+            }}>
+            <span {...{ style }}/>
+        </span>
     ];
 };

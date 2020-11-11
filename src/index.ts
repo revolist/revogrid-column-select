@@ -3,6 +3,8 @@ import { SelectColumnRenderer } from './renderer';
 import { SelectConfig } from './type';
 import { SelectColumnEditor } from './editor';
 
+export const Revogrid = window.Revogrid || {};
+
 export default class SelectColumnType {
     readonly editor = SelectColumnEditor;
 
@@ -15,3 +17,4 @@ export default class SelectColumnType {
 
     cellTemplate = SelectColumnRenderer;
 }
+Revogrid.SelectColumnType = SelectColumnType;

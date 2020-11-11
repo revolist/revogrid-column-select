@@ -1,6 +1,9 @@
-import { h, VNode } from "@stencil/core";
-import { Edition, RevoGrid } from "../../interfaces";
+import { h } from "@stencil/core";
+import {Edition} from '@revolist/revogrid/dist/types/interfaces';
 import { SelectConfig } from "./type";
+import {defineCustomElements} from "@revolist/revo-dropdown/loader";
+
+defineCustomElements();
 
 export class SelectColumnEditor implements Edition.EditorBase {
     constructor(
@@ -24,7 +27,7 @@ export class SelectColumnEditor implements Edition.EditorBase {
     disconnectedCallback(): void {
         // console.log('disconnected');
     }
-    render(_h: RevoGrid.HyperFunc<VNode>) {
+    render() {
         return <revo-dropdown 
             source={this.column?.source}
             dataId={this.column?.valueKey}
