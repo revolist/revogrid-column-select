@@ -1,6 +1,6 @@
 {
   "name": "@revolist/revogrid-column-select",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Select column type for RevoGrid system based on revo-dropdown",
   "main": "dist/index.js",
   "scripts": {

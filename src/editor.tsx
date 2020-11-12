@@ -1,9 +1,5 @@
-import { h } from "@stencil/core";
 import {Edition} from '@revolist/revogrid/dist/types/interfaces';
 import { SelectConfig } from "./type";
-import {defineCustomElements} from "@revolist/revo-dropdown/loader";
-
-defineCustomElements();
 
 export class SelectColumnEditor implements Edition.EditorBase {
     constructor(
@@ -21,13 +17,9 @@ export class SelectColumnEditor implements Edition.EditorBase {
     componentDidRender(): void {
         if (this.element) {
             this.element.value = this.editCell?.val;
-            // this.element.setAttribute('size', this.element.options.length.toString());
         }
     }
-    disconnectedCallback(): void {
-        // console.log('disconnected');
-    }
-    render() {
+    render(h: any) {
         return <revo-dropdown 
             source={this.column?.source}
             dataId={this.column?.valueKey}

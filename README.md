@@ -19,6 +19,13 @@ import SelectType from "@revolist/revogrid-column-select";
 
 const columns = [{
     prop: 'name',
+    labelKey: 'label',
+    valueKey: 'value',
+    source: [
+        { label: 'According', value: 'a' },
+        { label: 'Over', value: 'b' },
+        { label: 'Source', value: 's' }
+    ],
     columnType: 'select' // column type specified as 'select'
 }];
 const rows = [{ name: 'New item' }, { name: 'New item 2' }];
