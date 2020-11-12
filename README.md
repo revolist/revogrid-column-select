@@ -3,6 +3,9 @@ Custom column type for [RevoGrid](https://github.com/revolist/revogrid) componen
 <img src="./public/assets/sample.png" alt="Autocomplete dropdown" width="100%" />
 
 
+## Installation
+`npm i @revolist/revogrid-column-select`
+
 ## How to use
 
 - Import Select Column type;
