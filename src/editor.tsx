@@ -1,5 +1,6 @@
 import {Edition} from '@revolist/revogrid/dist/types/interfaces';
-import { SelectConfig } from "./type";
+import { ChangeValue, SelectConfig } from './type';
+
 
 export class SelectColumnEditor implements Edition.EditorBase {
     constructor(
@@ -27,8 +28,14 @@ export class SelectColumnEditor implements Edition.EditorBase {
             autocomplete={true}
             autoFocus={true}
             max-height="300"
-            onChangeValue={({detail: {val: {value}}}: CustomEvent<{val: {label: string, value: any}}>) => {
-            this.saveCallback(value);
-        }}/>;
+            onChangeValue={
+                ({detail}: CustomEvent<ChangeValue>) => {
+                    if (typeof detail.val === 'object') {
+                        this.saveCallback(detail.val.value);
+                    } else {
+                        this.saveCallback(detail.val);
+                    }
+                }
+            }/>;
     }
 }

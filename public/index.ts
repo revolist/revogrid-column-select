@@ -34,6 +34,7 @@ function generateFakeDataObject(rowsNumber: number, colsNumber: number) {
       }
       result[row][col] = row + ':' + col;
       if (col === 1) {
+        /** select data as object
         columns[col] = {
             ...columns[col],
             columnType: 'select',
@@ -45,8 +46,17 @@ function generateFakeDataObject(rowsNumber: number, colsNumber: number) {
               { label: 'Over', value: 'b' },
               { label: 'Source', value: 's' }
             ]
-        };
+        }; 
         result[row][col] = 'b';
+        */
+       /**  select data as array string[] */
+        columns[col] = {
+            ...columns[col],
+            columnType: 'select',
+            size: 150,
+            source: ['According', 'Source']
+        }; 
+        result[row][col] = 'According';
       }
   }
   let headers = Object.keys(columns).map((k) => columns[parseInt(k, 10)]);

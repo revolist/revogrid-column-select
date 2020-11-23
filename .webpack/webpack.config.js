@@ -15,7 +15,8 @@ module.exports = {
   externals: {
     '@revolist/revogrid': '@revolist/revogrid',
     '@revolist/revogrid/loader': '@revolist/revogrid/loader',
-    '@revolist/revo-dropdown': '@revolist/revo-dropdown'
+    '@revolist/revo-dropdown': '@revolist/revo-dropdown',
+    '@revolist/revo-dropdown/loader': '@revolist/revo-dropdown/loader'
   },
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ],

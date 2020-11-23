@@ -23,7 +23,9 @@ module.exports = {
       title: 'Development',
       template: './public/index.html',
       appMountId: 'app',
-      "exJs": [ "dist/index.js"],
+      "exJs": [ 
+        '<script type="text/javascript" src="dist/index.js"></script>'
+      ],
     }),
   ],
   resolve: {

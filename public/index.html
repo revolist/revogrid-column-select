@@ -19,8 +19,8 @@
   <link href="<%= htmlWebpackPlugin.files.css[css] %>" rel="stylesheet">
   <% } %>
   <% for(var i=0; i < htmlWebpackPlugin.options.exJs.length; i++) {%>
-    <script type="text/javascript" src="<%= htmlWebpackPlugin.options.exJs[i] %>"></script>
-    <% } %>
+    <%= htmlWebpackPlugin.options.exJs[i] %>
+  <% } %>
 </head>
 <body>
 <% if (htmlWebpackPlugin.options.unsupportedBrowser) { %>
