@@ -16,7 +16,7 @@ Custom column type for [RevoGrid](https://github.com/revolist/revogrid) componen
 ```js
 
 // do Select class import
-import SelectType from "@revolist/revogrid-column-select";
+import SelectTypePlugin from "@revolist/revogrid-column-select";
 
 const columns = [{
     prop: 'name',
@@ -32,7 +32,7 @@ const columns = [{
 const rows = [{ name: 'New item' }, { name: 'New item 2' }];
 
 // register column type
-const columnTypes = { 'select': new SelectColumnType() };
+const columnTypes = { 'select': new SelectTypePlugin() };
 
 // apply data to grid per your framework approach
 <revo-grid source={rows} columns={columns} columnTypes={columnTypes}/>
