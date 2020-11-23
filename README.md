@@ -1,5 +1,6 @@
 # `revogrid-column-select`
-Custom column type for [RevoGrid](https://github.com/revolist/revogrid) component based on [revo-dropdown](https://github.com/revolist/revodropdown) library..
+Custom column type for [RevoGrid](https://github.com/revolist/revogrid) component based on [revo-dropdown](https://github.com/revolist/revodropdown) library.
+
 <img src="./public/assets/sample.png" alt="Autocomplete dropdown" width="100%" />
 
 
