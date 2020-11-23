@@ -1,14 +1,31 @@
 {
   "name": "@revolist/revogrid-column-select",
-  "version": "1.0.3",
+  "version": "1.1.0",
   "description": "Select column type for RevoGrid system based on revo-dropdown",
   "main": "dist/index.js",
   "scripts": {
     "build": "webpack --config ./.webpack/webpack.config.js",
     "serve": "webpack serve --config ./.webpack/webpack.dev.js"
   },
-  "keywords": [],
   "author": "revolist",
+  "keywords": [
+    "revo-grid",
+    "revolist",
+    "datagrid",
+    "revoGrid",
+    "stenciljs",
+    "reactive",
+    "virtualgrid",
+    "virtual vue grid",
+    "react datagrid",
+    "editable",
+    "excel",
+    "webcomponent",
+    "autocomplete",
+    "dropdown",
+    "jsdropdown",
+    "dropdownlist"
+  ],
   "license": "MIT",
   "devDependencies": {
     "@revolist/vue-datagrid": "^1.1.1",

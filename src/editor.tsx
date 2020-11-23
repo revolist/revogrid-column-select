@@ -15,27 +15,34 @@ export class SelectColumnEditor implements Edition.EditorBase {
 
     element?: HTMLSelectElement|null;
     editCell?: Edition.EditCell;
-    componentDidRender(): void {
-        if (this.element) {
-            this.element.value = this.editCell?.val;
-        }
-    }
+    componentDidRender() {}
     render(h: any) {
+        let val = '';
+        let filter = '';
+        if (this.editCell) {
+            const model = this.editCell.model || {};
+            val = model[this.editCell?.prop] || '';
+        }
+        if (val !== this.editCell?.val) {
+            filter = this.editCell?.val;
+        }
         return <revo-dropdown 
             source={this.column?.source}
             dataId={this.column?.valueKey}
             dataLabel={this.column?.labelKey}
             autocomplete={true}
             autoFocus={true}
-            max-height="300"
-            onChangeValue={
-                ({detail}: CustomEvent<ChangeValue>) => {
-                    if (typeof detail.val === 'object') {
-                        this.saveCallback(detail.val.value);
-                    } else {
-                        this.saveCallback(detail.val);
-                    }
+            max-height='300'
+            value={val}
+            currentFilter={filter}
+            onChangeValue={({detail}: CustomEvent<ChangeValue>) => {
+                // object field mapping has to be preserved
+                if (typeof detail.val === 'object') {
+                    this.saveCallback(detail.val.value);
+                // mapping by array strings
+                } else {
+                    this.saveCallback(detail.val);
                 }
-            }/>;
+            }}/>;
     }
 }

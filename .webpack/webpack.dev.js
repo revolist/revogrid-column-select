@@ -24,7 +24,8 @@ module.exports = {
       template: './public/index.html',
       appMountId: 'app',
       "exJs": [ 
-        '<script type="text/javascript" src="dist/index.js"></script>'
+        '<script type="text/javascript" src="dist/index.js"></script>',
+        // '<script type="module" src="http://localhost:3333/build/revo-dropdown.esm.js"></script>'
       ],
     }),
   ],
