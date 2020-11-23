@@ -46,7 +46,7 @@
     "webpack-dev-server": "^3.11.0"
   },
   "dependencies": {
-    "@revolist/revo-dropdown": "^0.1.0",
-    "@revolist/revogrid": "^1.7.12"
+    "@revolist/revo-dropdown": "^1.0.0",
+    "@revolist/revogrid": "^1.8.0"
   }
 }
