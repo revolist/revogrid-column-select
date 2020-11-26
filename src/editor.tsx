@@ -37,11 +37,12 @@ export class SelectColumnEditor implements Edition.EditorBase {
             currentFilter={filter}
             onChangeValue={({detail}: CustomEvent<ChangeValue>) => {
                 // object field mapping has to be preserved
+                const preventFocus = detail.originalEvent.code=='Tab'? true : false;
                 if (typeof detail.val === 'object') {
-                    this.saveCallback(detail.val.value);
+                    this.saveCallback(detail.val.value, preventFocus);
                 // mapping by array strings
                 } else {
-                    this.saveCallback(detail.val);
+                    this.saveCallback(detail.val, preventFocus);
                 }
             }}/>;
     }
