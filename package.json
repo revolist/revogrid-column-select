@@ -51,10 +51,10 @@
     "vue": "^2.6.12",
     "webpack": "^5.1.3",
     "webpack-cli": "^4.1.0",
-    "webpack-dev-server": "^3.11.0"
+    "webpack-dev-server": "^3.11.0",
+    "@revolist/revogrid": "^1.8.1"
   },
   "dependencies": {
-    "@revolist/revo-dropdown": "^1.0.6",
-    "@revolist/revogrid": "^1.8.1"
+    "@revolist/revo-dropdown": "^1.0.6"
   }
 }
