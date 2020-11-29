@@ -5,6 +5,6 @@ export interface SelectConfig extends RevoGrid.ColumnRegular {
     labelKey?: string;
     valueKey?: string;
 }
-type ObjectChange = {val: {label: string, value: any}};
-type ArrayChange = {val: string};
+type ObjectChange = {val: {label: string, value: any},originalEvent: {code:string}};
+type ArrayChange = {val: string,originalEvent:{code:string}};
 export type ChangeValue = ObjectChange|ArrayChange;
