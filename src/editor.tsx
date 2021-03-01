@@ -35,7 +35,7 @@ export class SelectColumnEditor implements Edition.EditorBase {
             max-height='300'
             value={val}
             currentFilter={filter}
-            onChangeValue={({detail}: CustomEvent<ChangeValue>) => {
+            onChanged={({ detail }: CustomEvent<ChangeValue>) => {
                 // object field mapping has to be preserved
                 const preventFocus = detail.originalEvent.code=='Tab'? true : false;
                 if (typeof detail.val === 'object') {
