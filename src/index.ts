@@ -4,7 +4,6 @@ import { SelectConfig } from './type';
 import { SelectColumnEditor } from './editor';
 import * as loader from '@revolist/revo-dropdown/loader';
 
-export const Revogrid = window.Revogrid || {};
 
 export default class SelectColumnType {
     constructor() {
@@ -27,4 +26,4 @@ export default class SelectColumnType {
         }
     }
 }
-Revogrid.SelectColumnType = SelectColumnType;
+export const CreateSelectColumnType = SelectColumnType;

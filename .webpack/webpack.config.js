@@ -1,10 +1,8 @@
 const path = require('path');
 
-let libraryName = 'index';
+let libraryName = 'RevoGridColumnSelect';
 module.exports = {
-  entry: {
-    [libraryName]: './src/index.ts'
-  },
+  entry: './src/index.ts',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',

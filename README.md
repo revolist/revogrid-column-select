@@ -37,3 +37,7 @@ const columnTypes = { 'select': new SelectTypePlugin() };
 // apply data to grid per your framework approach
 <revo-grid source={rows} columns={columns} columnTypes={columnTypes}/>
 ```
+
+## How to use with static Vanilla JS:
+
+For static sites check this [Sample](https://codesandbox.io/s/revogrid-staticjs-column-jvztc?file=/index.html).
