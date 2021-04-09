@@ -21,9 +21,9 @@ export class SelectColumnEditor implements Edition.EditorBase {
         let filter = '';
         if (this.editCell) {
             const model = this.editCell.model || {};
-            val = model[this.editCell?.prop] || '';
+            val = model[this.editCell?.prop] != null ? model[this.editCell.prop] : '';
         }
-        if (val !== this.editCell?.val) {
+        if (val != this.editCell?.val) {
             filter = this.editCell?.val;
         }
         return <revo-dropdown 
