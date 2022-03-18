@@ -13,7 +13,7 @@ const style = {
 export const SelectColumnRenderer = (h: any, {model, prop, column}: any): any[] => {
     let col = column as SelectConfig;
     let val = model[prop];
-    if (col.labelKey && col.sourceLookup) {
+    if (col.labelKey && col.sourceLookup && col.sourceLookup[val]) {
         val = col.sourceLookup[val][col.labelKey];
     }
     return [
