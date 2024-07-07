@@ -36,8 +36,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
-    "@revolist/vue-datagrid": "^1.1.1",
-    "@stencil/core": "^2.3.0",
+    "@revolist/vue-datagrid": "^4.0.42",
+    "@stencil/core": "^4.19.2",
     "@types/lodash": "^4.14.149",
     "clean-webpack-plugin": "^3.0.0",
     "css-loader": "^5.0.1",
@@ -52,7 +52,7 @@
     "webpack": "^5.1.3",
     "webpack-cli": "^4.1.0",
     "webpack-dev-server": "^3.11.0",
-    "@revolist/revogrid": "latest"
+    "@revolist/revogrid": "^4.0.42"
   },
   "dependencies": {
     "@revolist/revo-dropdown": "^2.0.0"

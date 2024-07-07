@@ -1,13 +1,13 @@
-import { Edition } from '@revolist/revogrid/dist/types/interfaces';
+import { EditCell, EditorBase, SaveData } from '@revolist/revogrid';
 import { ChangeValue, SelectConfig } from './type';
 
-export class SelectColumnEditor implements Edition.EditorBase {
+export class SelectColumnEditor implements EditorBase {
   constructor(
     // column data
     private column: SelectConfig,
     // to save changes
     private saveCallback: (
-      value: Edition.SaveData,
+      value: SaveData,
       preventFocus?: boolean,
     ) => void,
     // to close editor, if focusNext true, after close editor focus on next cell
@@ -15,7 +15,7 @@ export class SelectColumnEditor implements Edition.EditorBase {
   ) {}
 
   element?: HTMLSelectElement | null;
-  editCell?: Edition.EditCell;
+  editCell?: EditCell;
   componentDidRender() {}
   render(h: any) {
     let val = '';
