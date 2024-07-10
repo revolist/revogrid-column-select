@@ -2,16 +2,16 @@ import keyBy from 'lodash/keyBy';
 import { SelectColumnRenderer } from './renderer';
 import { SelectConfig } from './type';
 import { SelectColumnEditor } from './editor';
-import * as loader from '@revolist/revo-dropdown/loader';
+import { defineCustomElements } from '@revolist/revo-dropdown/loader';
 
 
 export default class SelectColumnType {
     constructor() {
-        this.loadCustomComponent();
+        defineCustomElements?.();
     }
     readonly editor = SelectColumnEditor;
 
-    beforeSetup = (col: SelectConfig) => {
+    beforeSetup = (col: SelectConfig['column']) => {
         if (!col.source) {
             return;
         }
@@ -19,11 +19,5 @@ export default class SelectColumnType {
     };
 
     cellTemplate = SelectColumnRenderer;
-
-    private loadCustomComponent() {
-        if (loader?.defineCustomElements) {
-            loader?.defineCustomElements();
-        }
-    }
 }
 export const CreateSelectColumnType = SelectColumnType;

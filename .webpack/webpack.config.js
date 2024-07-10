@@ -1,8 +1,11 @@
 const path = require('path');
 
-let libraryName = 'RevoGridColumnSelect';
-module.exports = {
-  entry: './src/index.ts',
+let libraryName = 'revo-common-select';
+const common = {
+  entry: {
+    [libraryName]: './src/index.ts',
+  },
+  mode: 'production',
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].js',
@@ -10,14 +13,14 @@ module.exports = {
     libraryTarget: 'umd',
     umdNamedDefine: true,
   },
-  externals: {
-    '@revolist/revogrid': '@revolist/revogrid',
-    '@revolist/revogrid/loader': '@revolist/revogrid/loader',
-    '@revolist/revo-dropdown': '@revolist/revo-dropdown',
-    '@revolist/revo-dropdown/loader': '@revolist/revo-dropdown/loader'
-  },
+  externals: [
+    '@revolist/revogrid',
+    /^@revolist\/revogrid\//,
+    '@revolist/revo-dropdown',
+    '@revolist/revo-dropdown/loader',
+  ],
   resolve: {
-    extensions: [ '.tsx', '.ts', '.js' ],
+    extensions: ['.tsx', '.ts', '.js'],
   },
   module: {
     rules: [
@@ -25,8 +28,28 @@ module.exports = {
         test: /\.tsx?$/,
         use: 'ts-loader',
         exclude: /node_modules/,
-        
       },
     ],
   },
 };
+
+module.exports = [{
+  ...common,
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: '[name].umd.cjs',
+    library: libraryName,
+    libraryTarget: 'umd',
+    umdNamedDefine: true,
+  },
+}, {
+  ...common,
+  output: {
+    path: path.resolve(__dirname, '../dist'),
+    filename: '[name].mjs',
+    libraryTarget: 'module',
+  },
+  experiments: {
+    outputModule: true // Enables experimental support for ESM output
+  },
+}];

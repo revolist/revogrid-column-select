@@ -14,12 +14,11 @@
     "target": "es2017",
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "jsx": "react",
-    "jsxFactory": "h",
     "noImplicitAny": true,
     "noImplicitThis": true,
     "noImplicitReturns": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "skipLibCheck": true
   },
   "include": [
     "src",
