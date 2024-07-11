@@ -2,12 +2,12 @@ import keyBy from 'lodash/keyBy';
 import { SelectColumnRenderer } from './renderer';
 import { SelectConfig } from './type';
 import { SelectColumnEditor } from './editor';
-import { defineCustomElements } from '@revolist/revo-dropdown/loader';
+import { defineCustomElement } from '@revolist/revo-dropdown/standalone/revo-dropdown.js';
 
 
 export default class SelectColumnType {
     constructor() {
-        defineCustomElements?.();
+        defineCustomElement?.();
     }
     readonly editor = SelectColumnEditor;
 
