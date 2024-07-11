@@ -18,7 +18,7 @@ export const SelectColumnRenderer = (
   _additionalData: any,
 ) => {
   let val = model[prop];
-  if (column.labelKey && column.sourceLookup) {
+  if (column.labelKey && column.sourceLookup && column.sourceLookup[val]) {
     val = column.sourceLookup[val][column.labelKey];
   }
   return [
