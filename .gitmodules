@@ -1,0 +1,3 @@
+[submodule "revodropdown"]
+	path = revodropdown
+	url = https://github.com/revolist/revodropdown.git
