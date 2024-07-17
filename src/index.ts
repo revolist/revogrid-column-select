@@ -21,3 +21,8 @@ export default class SelectColumnType {
     cellTemplate = SelectColumnRenderer;
 }
 export const CreateSelectColumnType = SelectColumnType;
+// Ensure it's available on window for UMD/IIFE builds
+if (typeof window !== 'undefined') {
+    (window as any).RevoColumnSelect = SelectColumnType;
+  }
+  
