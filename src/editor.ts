@@ -29,7 +29,7 @@ export class SelectColumnEditor implements EditorBase {
     }
     const column = this.data?.column;
     return h('revo-dropdown', {
-      source: column?.source,
+      ...column,
       dataId: column?.valueKey,
       dataLabel: column?.labelKey,
       autocomplete: true,

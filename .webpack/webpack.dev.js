@@ -31,6 +31,9 @@ module.exports = {
   ],
   resolve: {
     extensions: [ '.tsx', '.ts', '.js' ],
+    alias: {
+      '@revolist/revo-dropdown': path.resolve(__dirname, '../revodropdown'),
+    }
   },
   module: {
     rules: [
