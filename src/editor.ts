@@ -1,4 +1,4 @@
-import { EditCell, EditorBase, HyperFunc, SaveData, VNode } from '@revolist/revogrid';
+import { EditCell, EditorBase, HyperFunc, VNode } from '@revolist/revogrid';
 import { ChangeValue, SelectConfig } from './type';
 
 export class SelectColumnEditor implements EditorBase {
@@ -7,7 +7,7 @@ export class SelectColumnEditor implements EditorBase {
     private data: SelectConfig,
     // to save changes
     private saveCallback: (
-      value: SaveData,
+      value: any,
       preventFocus?: boolean,
     ) => void,
     // to close editor, if focusNext true, after close editor focus on next cell
