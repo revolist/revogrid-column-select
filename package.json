@@ -64,6 +64,7 @@
     "webpack-dev-server": "^5.0.4"
   },
   "dependencies": {
-    "@revolist/revo-dropdown": "^3.0.3"
+    "@revolist/revo-dropdown": "^3.0.3",
+    "@stencil/core": "^4.22.2"
   }
 }
