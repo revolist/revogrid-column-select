@@ -13,13 +13,13 @@ jobs:
       with:
         node-version: '22.x'
         registry-url: 'https://registry.npmjs.org'
-    - run: npm ci
+    - run: |
+        npm install -g npm@latest
+        npm ci
     # Build
     - run: npm run build
     # Publish to npm
     - run: npm publish --provenance --access public
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
     # Setup .npmrc file to publish to GitHub Packages
     - uses: actions/setup-node@v4
       with:
