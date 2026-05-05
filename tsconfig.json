@@ -22,10 +22,10 @@
   },
   "include": [
     "src",
+    "types/css.d.ts",
     "types/tsx.d.ts"
   ],
   "exclude": [
     "node_modules"
   ]
 }
-

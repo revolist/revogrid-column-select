@@ -1,6 +1,6 @@
 import './style.css';
-import Vue from 'vue';
-import Grid from '@revolist/vue-datagrid';
+import { createApp, h } from 'vue';
+import RevoGrid from '@revolist/vue3-datagrid';
 import SelectColumnType from '../src';
 
 function generateHeader(index: number) {
@@ -17,7 +17,7 @@ function generateHeader(index: number) {
   return label.toLowerCase();
 }
 function generateFakeDataObject(rowsNumber: number, colsNumber: number) {
-  const result: Record<any, any> = [];
+  const result: Record<any, any>[] = [];
   const columns: Record<number, any> = {};
   const all = colsNumber * rowsNumber;
   for (let j = 0; j < all; j++) {
@@ -71,23 +71,19 @@ function generateFakeDataObject(rowsNumber: number, colsNumber: number) {
   };
 }
 
-new Vue({
-  el: '#app',
-  components: {
-    Grid
-  },
-  render: (h) => {
+createApp({
+  render() {
     const {source, headers} = generateFakeDataObject(100, 5);
-    return h('div', { class: {'tile large': true} }, [h(Grid, {
-      props: {
+    return h('div', { class: {'tile large': true} }, [
+      h(RevoGrid, {
         source,
         resize: true,
         columns: headers,
         theme: 'material',
         columnTypes: {
-          'select': new SelectColumnType()
+          select: new SelectColumnType()
         }
       }
-    })]);
+    )]);
   }
-});
+}).mount('#app');

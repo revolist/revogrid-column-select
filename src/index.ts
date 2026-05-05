@@ -1,3 +1,4 @@
+import './editor-style.css';
 import keyBy from 'lodash/keyBy';
 import { SelectColumnRenderer } from './renderer';
 import { SelectConfig } from './type';

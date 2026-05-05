@@ -2,6 +2,8 @@ import { type EditCell, type EditorBase, type HyperFunc, type VNode } from '@rev
 import { type ChangeValue, type SelectConfig } from './type';
 
 export class SelectColumnEditor implements EditorBase {
+  private opened = false;
+
   constructor(
     // column data
     private data: SelectConfig,
@@ -16,7 +18,12 @@ export class SelectColumnEditor implements EditorBase {
 
   element?: HTMLRevoDropdownElement | null;
   editCell?: EditCell;
-  componentDidRender() {}
+  componentDidRender() {
+    if (!this.opened && this.element) {
+      this.opened = true;
+      this.element.doOpen?.();
+    }
+  }
 
   getValue() {
     return this.element?.value;
@@ -24,13 +31,9 @@ export class SelectColumnEditor implements EditorBase {
 
   render(h: HyperFunc<VNode>, _additionalData: any) {
     let val = '';
-    let filter = '';
     if (this.editCell) {
       const model = this.editCell.model || {};
       val = model[this.editCell?.prop] ?? '';
-    }
-    if (val != this.editCell?.val) {
-      filter = this.editCell?.val;
     }
     const column = this.data?.column;
     return h('revo-dropdown', {
@@ -38,15 +41,14 @@ export class SelectColumnEditor implements EditorBase {
       ref: (e: HTMLRevoDropdownElement | null) => (this.element = e),
       dataId: column?.valueKey,
       dataLabel: column?.labelKey,
-      autocomplete: true,
+      autocomplete: false,
       autoFocus: true,
       maxHeight: '300',
       value: val,
-      currentFilter: filter,
       onChanged: ({ detail }: CustomEvent<ChangeValue>) => {
         // object field mapping has to be preserved
         const preventFocus =
-          detail.originalEvent.code == 'Tab' ? true : false;
+          detail.originalEvent?.code == 'Tab' ? true : false;
         if (typeof detail.val === 'object') {
           this.saveCallback(detail.val.value, preventFocus);
           // mapping by array strings
