@@ -22,7 +22,7 @@ jobs:
     # Build
     - run: npm run build
     # Publish to npm
-    - run: npm publish --access public
+    - run: npm publish --access public --registry=https://registry.npmjs.org
     # Setup .npmrc file to publish to GitHub Packages
     - uses: actions/setup-node@v6
       with:
@@ -30,7 +30,7 @@ jobs:
         # Defaults to the user or organization that owns the workflow file
         scope: '@revolist'
     # Publish to GitHub Packages
-    - run: npm publish
+    - run: npm publish --registry=https://npm.pkg.github.com
       env:
         NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Generate SBOM (SPDX)
