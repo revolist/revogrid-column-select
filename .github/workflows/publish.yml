@@ -17,12 +17,8 @@ jobs:
       with:
         node-version: 24.x
         registry-url: https://registry.npmjs.org
-    - name: Configure GitHub Packages read auth
-      run: echo "//npm.pkg.github.com/:_authToken=${NODE_AUTH_TOKEN}" >> ~/.npmrc
-      env:
-        NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     - name: Install dependencies
-      run: npm ci
+      run: npm i
     # Build
     - run: npm run build
     # Publish to npm
