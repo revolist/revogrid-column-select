@@ -2,26 +2,29 @@ name: Publish Package
 on:
   release:
     types: [created]
-permissions: write-all
+permissions:
+  actions: read
+  contents: write
+  id-token: write
+  packages: write
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
     # Setup .npmrc file to publish to npm
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
-        node-version: '22.x'
-        registry-url: 'https://registry.npmjs.org'
-    - run: |
-        npm install -g npm@latest
-        npm ci
+        node-version: 24.x
+        registry-url: https://registry.npmjs.org
+    - name: Install dependencies
+      run: npm ci
     # Build
     - run: npm run build
     # Publish to npm
-    - run: npm publish --provenance --access public
+    - run: npm publish --access public
     # Setup .npmrc file to publish to GitHub Packages
-    - uses: actions/setup-node@v4
+    - uses: actions/setup-node@v6
       with:
         registry-url: 'https://npm.pkg.github.com'
         # Defaults to the user or organization that owns the workflow file
