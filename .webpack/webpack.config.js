@@ -11,6 +11,7 @@ const common = {
     filename: '[name].js',
     library: libraryName,
     libraryTarget: 'umd',
+    globalObject: 'globalThis',
     umdNamedDefine: true,
   },
   externals: [
@@ -44,6 +45,7 @@ module.exports = [{
     filename: '[name].umd.cjs',
     library: libraryName,
     libraryTarget: 'umd',
+    globalObject: 'globalThis',
     umdNamedDefine: true,
   },
 }, {
