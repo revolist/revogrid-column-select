@@ -1,6 +1,11 @@
 const path = require('path');
+const webpack = require('webpack');
 
 let libraryName = 'revo-common-select';
+const createPlugins = () => [
+  new webpack.optimize.LimitChunkCountPlugin({ maxChunks: 1 }),
+];
+
 const common = {
   entry: {
     [libraryName]: './src/index.ts',
@@ -17,8 +22,6 @@ const common = {
   externals: [
     '@revolist/revogrid',
     /^@revolist\/revogrid\//,
-    '@revolist/revo-dropdown',
-    '@revolist/revo-dropdown/loader',
   ],
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -40,6 +43,7 @@ const common = {
 
 module.exports = [{
   ...common,
+  plugins: createPlugins(),
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].umd.cjs',
@@ -50,6 +54,7 @@ module.exports = [{
   },
 }, {
   ...common,
+  plugins: createPlugins(),
   output: {
     path: path.resolve(__dirname, '../dist'),
     filename: '[name].mjs',

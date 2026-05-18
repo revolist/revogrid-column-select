@@ -3,11 +3,22 @@ import keyBy from 'lodash/keyBy';
 import { SelectColumnRenderer } from './renderer';
 import { SelectConfig } from './type';
 import { SelectColumnEditor } from './editor';
-import { defineCustomElements } from '@revolist/revo-dropdown/loader';
+import { defineCustomElement as defineRevoDropdown } from '@revolist/revo-dropdown/standalone/revo-dropdown.js';
+
+let dropdownDefined = false;
+
+function defineDropdownElements() {
+  if (dropdownDefined || typeof customElements === 'undefined') {
+    return;
+  }
+  console.warn('Defining revo-dropdown element for select column editor. If you are using a framework, consider importing the dropdown component from @revolist/revo-dropdown to avoid this warning and reduce bundle size.');
+  defineRevoDropdown();
+  dropdownDefined = true;
+}
 
 export default class SelectColumnType {
   constructor() {
-    defineCustomElements?.();
+    defineDropdownElements();
   }
   readonly editor = SelectColumnEditor;
 
