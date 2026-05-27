@@ -44,6 +44,21 @@ const columnTypes = { 'select': new SelectTypePlugin() };
 <revo-grid source={rows} columns={columns} columnTypes={columnTypes}/>
 ```
 
+`source` can also be a synchronous function when options depend on the
+current row or external app state passed through `additionalData`:
+
+```js
+const columns = [{
+    prop: 'city',
+    labelKey: 'label',
+    valueKey: 'value',
+    source: ({ model, additionalData }) => {
+        return additionalData.citiesByCountry[model.country] || [];
+    },
+    columnType: 'select'
+}];
+```
+
 ## How to use with static Vanilla JS:
 
 For static sites check this [Sample](https://codesandbox.io/s/revogrid-staticjs-column-jvztc?file=/index.html).

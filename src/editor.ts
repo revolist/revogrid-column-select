@@ -1,5 +1,9 @@
 import { type EditCell, type EditorBase, type HyperFunc, type VNode } from '@revolist/revogrid';
 import { type ChangeValue, type SelectConfig } from './type';
+import {
+  createSelectSourceContext,
+  resolveSelectSource,
+} from './source';
 
 export class SelectColumnEditor implements EditorBase {
   private opened = false;
@@ -29,15 +33,20 @@ export class SelectColumnEditor implements EditorBase {
     return this.element?.value;
   }
 
-  render(h: HyperFunc<VNode>, _additionalData: any) {
+  render(h: HyperFunc<VNode>, additionalData: any) {
     let val = '';
     if (this.editCell) {
       const model = this.editCell.model || {};
       val = model[this.editCell?.prop] ?? '';
     }
     const column = this.data?.column;
+    const source = resolveSelectSource(
+      column,
+      createSelectSourceContext(this.editCell || this.data, additionalData),
+    );
     return h('revo-dropdown', {
       ...column,
+      source,
       ref: (e: HTMLRevoDropdownElement | null) => (this.element = e),
       dataId: column?.valueKey,
       dataLabel: column?.labelKey,

@@ -1,5 +1,10 @@
 import { HyperFunc, VNode } from '@revolist/revogrid';
 import { SelectConfig } from './type';
+import {
+  createSelectSourceContext,
+  resolveSelectLabel,
+  resolveSelectSource,
+} from './source';
 
 const style = {
   width: '0',
@@ -14,13 +19,16 @@ const style = {
 };
 export const SelectColumnRenderer = (
   h: HyperFunc<VNode>,
-  { model, prop, column }: SelectConfig,
-  _additionalData: any,
+  schema: SelectConfig,
+  additionalData: any,
 ) => {
+  const { model, prop, column } = schema;
   let val = model[prop];
-  if (column.labelKey && column.sourceLookup && column.sourceLookup[val]) {
-    val = column.sourceLookup[val][column.labelKey];
-  }
+  const source = resolveSelectSource(
+    column,
+    createSelectSourceContext(schema, additionalData),
+  );
+  val = resolveSelectLabel(val, source, column);
   return [
     h('div', { class: { 'cell-value-wrapper': true } }, [val]),
     h(
@@ -28,7 +36,7 @@ export const SelectColumnRenderer = (
       {
         class: { 'arrow-down': true },
         onClick: (e: MouseEvent) => {
-          e.target.dispatchEvent(
+          e.target?.dispatchEvent(
             new MouseEvent('dblclick', {
               bubbles: true,
               cancelable: true,
