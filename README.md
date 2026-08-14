@@ -46,10 +46,11 @@ const columnTypes = { 'select': new SelectTypePlugin() };
 
 ### Keep cell and dropdown templates in sync
 
-Set `syncCellTemplate` to `true` to render dropdown options with the resolved
-column `cellTemplate`. The flag is opt-in, so existing text-only dropdowns are
-unchanged. Object options are also added to the template's synthetic row model,
-which lets renderers reuse metadata such as avatar indexes or image URLs.
+Set `syncCellTemplate` to `true` to render dropdown options and the selected
+value inside the active editor with the resolved column `cellTemplate`. The
+flag is opt-in, so existing text-only dropdowns are unchanged. Object options
+are also added to the template's synthetic row model, which lets renderers
+reuse metadata such as avatar indexes or image URLs.
 
 ```js
 const ownerType = new SelectTypePlugin();
@@ -70,8 +71,8 @@ const columns = [{
 const columnTypes = { ownerSelect: ownerType };
 ```
 
-An explicit `template` on the column remains authoritative when both options
-are configured.
+An explicit `template` remains authoritative for dropdown options, while an
+explicit `selectedTemplate` overrides the selected editor value.
 
 `source` can also be a synchronous function when options depend on the
 current row or external app state passed through `additionalData`:

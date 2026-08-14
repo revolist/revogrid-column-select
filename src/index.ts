@@ -24,7 +24,7 @@ export default class SelectColumnType {
 
   cellTemplate = SelectColumnRenderer;
 
-  /** Mirror the resolved cell template in dropdown options. */
+  /** Mirror the resolved cell template in dropdown options and selected editor value. */
   syncCellTemplate = false;
 }
 export const CreateSelectColumnType = SelectColumnType;

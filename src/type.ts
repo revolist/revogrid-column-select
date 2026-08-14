@@ -26,10 +26,12 @@ export interface SelectConfig extends ColumnDataSchemaModel {
     sourceLookup?: Record<string, any>;
     labelKey?: string;
     valueKey?: string;
-    /** Mirror the resolved cell template in dropdown options. */
+    /** Reuse the resolved cell template for options and the selected editor value. */
     syncCellTemplate?: boolean;
     /** Explicit dropdown option template. Takes precedence over synchronization. */
     template?: SelectDropdownTemplate;
+    /** Explicit selected-value template. Takes precedence over synchronization. */
+    selectedTemplate?: SelectDropdownTemplate;
   };
 }
 

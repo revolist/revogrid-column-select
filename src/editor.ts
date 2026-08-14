@@ -22,20 +22,25 @@ function isOptionModel(option: SelectOption): option is Record<string, any> {
   return !!option && typeof option === 'object' && !Array.isArray(option);
 }
 
-function hasTemplateContent(rendered: any) {
-  return rendered !== undefined
-    && rendered !== null
-    && rendered !== false
-    && rendered !== '';
+function hasTemplateContent(rendered: any): boolean {
+  if (Array.isArray(rendered)) {
+    return rendered.some(hasTemplateContent);
+  }
+  return (
+    rendered !== null &&
+    rendered !== undefined &&
+    rendered !== false &&
+    rendered !== ''
+  );
 }
 
-export function createSelectDropdownTemplate(
+function createSyncedTemplate(
   data: SelectConfig,
-  additionalData?: any,
+  additionalData: any,
 ): SelectDropdownTemplate | undefined {
   const { column } = data;
-  if (!column?.syncCellTemplate || column.template || !column.cellTemplate) {
-    return column?.template;
+  if (!column.syncCellTemplate || !column.cellTemplate) {
+    return undefined;
   }
   const cellTemplate = column.cellTemplate;
 
@@ -43,7 +48,7 @@ export function createSelectDropdownTemplate(
     const value = getSelectOptionValue(option, column);
     const prop = data.prop ?? column.prop;
     const model = {
-      ...data.model,
+      ...(data.model || {}),
       ...(isOptionModel(option) ? option : {}),
       ...(prop === undefined ? {} : { [prop]: value }),
     };
@@ -51,6 +56,7 @@ export function createSelectDropdownTemplate(
       createElement,
       {
         ...data,
+        column,
         model,
         prop,
         value,
@@ -61,6 +67,17 @@ export function createSelectDropdownTemplate(
     return hasTemplateContent(rendered)
       ? rendered
       : getSelectOptionLabel(option, column);
+  };
+}
+
+export function createSelectDropdownTemplates(
+  data: SelectConfig,
+  additionalData?: any,
+) {
+  const syncedTemplate = createSyncedTemplate(data, additionalData);
+  return {
+    template: data.column.template ?? syncedTemplate,
+    selectedTemplate: data.column.selectedTemplate ?? syncedTemplate,
   };
 }
 
@@ -103,14 +120,14 @@ export class SelectColumnEditor implements EditorBase {
       column,
       createSelectSourceContext(this.editCell || this.data, additionalData),
     );
-    const template = createSelectDropdownTemplate(
+    const templates = createSelectDropdownTemplates(
       (this.editCell || this.data) as SelectConfig,
       additionalData,
     );
     return h('revo-dropdown', {
       ...column,
       source,
-      template,
+      ...templates,
       ref: (e: HTMLRevoDropdownElement | null) => (this.element = e),
       dataId: column?.valueKey,
       dataLabel: column?.labelKey,

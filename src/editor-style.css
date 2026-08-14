@@ -24,6 +24,11 @@ revogr-edit revo-dropdown input.filter-box {
   -webkit-text-fill-color: currentColor;
 }
 
+revogr-edit revo-dropdown .selected-value {
+  height: 100%;
+  font: inherit;
+}
+
 revogr-edit revo-dropdown label,
 revogr-edit revo-dropdown fieldset {
   display: none;
