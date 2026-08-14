@@ -1,9 +1,68 @@
-import { type EditCell, type EditorBase, type HyperFunc, type VNode } from '@revolist/revogrid';
-import { type ChangeValue, type SelectConfig } from './type';
+import {
+  type CellTemplateProp,
+  type EditCell,
+  type EditorBase,
+  type HyperFunc,
+  type VNode,
+} from '@revolist/revogrid';
+import {
+  type ChangeValue,
+  type SelectConfig,
+  type SelectDropdownTemplate,
+  type SelectOption,
+} from './type';
 import {
   createSelectSourceContext,
+  getSelectOptionLabel,
+  getSelectOptionValue,
   resolveSelectSource,
 } from './source';
+
+function isOptionModel(option: SelectOption): option is Record<string, any> {
+  return !!option && typeof option === 'object' && !Array.isArray(option);
+}
+
+function hasTemplateContent(rendered: any) {
+  return rendered !== undefined
+    && rendered !== null
+    && rendered !== false
+    && rendered !== '';
+}
+
+export function createSelectDropdownTemplate(
+  data: SelectConfig,
+  additionalData?: any,
+): SelectDropdownTemplate | undefined {
+  const { column } = data;
+  if (!column?.syncCellTemplate || column.template || !column.cellTemplate) {
+    return column?.template;
+  }
+  const cellTemplate = column.cellTemplate;
+
+  return (createElement, option) => {
+    const value = getSelectOptionValue(option, column);
+    const prop = data.prop ?? column.prop;
+    const model = {
+      ...data.model,
+      ...(isOptionModel(option) ? option : {}),
+      ...(prop === undefined ? {} : { [prop]: value }),
+    };
+    const rendered = cellTemplate(
+      createElement,
+      {
+        ...data,
+        model,
+        prop,
+        value,
+      } as CellTemplateProp,
+      additionalData,
+    );
+
+    return hasTemplateContent(rendered)
+      ? rendered
+      : getSelectOptionLabel(option, column);
+  };
+}
 
 export class SelectColumnEditor implements EditorBase {
   private opened = false;
@@ -44,9 +103,14 @@ export class SelectColumnEditor implements EditorBase {
       column,
       createSelectSourceContext(this.editCell || this.data, additionalData),
     );
+    const template = createSelectDropdownTemplate(
+      (this.editCell || this.data) as SelectConfig,
+      additionalData,
+    );
     return h('revo-dropdown', {
       ...column,
       source,
+      template,
       ref: (e: HTMLRevoDropdownElement | null) => (this.element = e),
       dataId: column?.valueKey,
       dataLabel: column?.labelKey,

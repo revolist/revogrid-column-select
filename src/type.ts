@@ -1,6 +1,16 @@
-import { ColumnDataSchemaModel, ColumnRegular } from '@revolist/revogrid';
+import {
+  type ColumnDataSchemaModel,
+  type ColumnRegular,
+  type HyperFunc,
+  type VNode,
+} from '@revolist/revogrid';
 
 export type SelectOption = string | { [label: string]: any };
+
+export type SelectDropdownTemplate = (
+  createElement: HyperFunc<VNode>,
+  option: SelectOption,
+) => any;
 
 export type SelectSourceContext = ColumnDataSchemaModel & {
   additionalData?: any;
@@ -16,6 +26,10 @@ export interface SelectConfig extends ColumnDataSchemaModel {
     sourceLookup?: Record<string, any>;
     labelKey?: string;
     valueKey?: string;
+    /** Mirror the resolved cell template in dropdown options. */
+    syncCellTemplate?: boolean;
+    /** Explicit dropdown option template. Takes precedence over synchronization. */
+    template?: SelectDropdownTemplate;
   };
 }
 

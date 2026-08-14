@@ -44,6 +44,35 @@ const columnTypes = { 'select': new SelectTypePlugin() };
 <revo-grid source={rows} columns={columns} columnTypes={columnTypes}/>
 ```
 
+### Keep cell and dropdown templates in sync
+
+Set `syncCellTemplate` to `true` to render dropdown options with the resolved
+column `cellTemplate`. The flag is opt-in, so existing text-only dropdowns are
+unchanged. Object options are also added to the template's synthetic row model,
+which lets renderers reuse metadata such as avatar indexes or image URLs.
+
+```js
+const ownerType = new SelectTypePlugin();
+ownerType.cellTemplate = ownerCellTemplate;
+ownerType.syncCellTemplate = true;
+
+const columns = [{
+    prop: 'owner',
+    columnType: 'ownerSelect',
+    labelKey: 'name',
+    valueKey: 'name',
+    source: [
+        { name: 'Maya Chen', avatarIndex: 1 },
+        { name: 'Elias Novak', avatarIndex: 2 },
+    ],
+}];
+
+const columnTypes = { ownerSelect: ownerType };
+```
+
+An explicit `template` on the column remains authoritative when both options
+are configured.
+
 `source` can also be a synchronous function when options depend on the
 current row or external app state passed through `additionalData`:
 

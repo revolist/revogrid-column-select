@@ -23,6 +23,9 @@ export default class SelectColumnType {
   readonly editor = SelectColumnEditor;
 
   cellTemplate = SelectColumnRenderer;
+
+  /** Mirror the resolved cell template in dropdown options. */
+  syncCellTemplate = false;
 }
 export const CreateSelectColumnType = SelectColumnType;
 // Ensure it's available on window for UMD/IIFE builds
