@@ -1,6 +1,6 @@
 {
   "name": "@revolist/revogrid-column-select",
-  "version": "3.2.2",
+  "version": "3.2.3",
   "description": "Select column type for RevoGrid system based on revo-dropdown",
   "main": "./dist/revo-common-select.umd.cjs",
   "module": "./dist/revo-common-select.mjs",
@@ -61,10 +61,10 @@
     "vue": "^3.5.29",
     "webpack": "^5.92.1",
     "webpack-cli": "^5.1.4",
-    "webpack-dev-server": "^5.0.4"
+    "webpack-dev-server": "^6.0.0"
   },
   "dependencies": {
-    "@revolist/revo-dropdown": "^3.0.10",
+    "@revolist/revo-dropdown": "^3.0.11",
     "@stencil/core": "^4.43.2"
   }
 }
